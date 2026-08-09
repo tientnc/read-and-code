@@ -1,0 +1,10 @@
+[project]
+name = "vericot-repro"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "z3-solver>=4.13",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
