@@ -102,9 +102,16 @@ def call_gemini(prompt, model=DEFAULT_GEMINI_MODEL, temperature=0.0):
         },
     )
     try:
-        return resp["candidates"][0]["content"]["parts"][0]["text"]
+        parts = resp["candidates"][0]["content"]["parts"]
     except (KeyError, IndexError) as e:
         raise LLMError(f"unexpected Gemini response: {resp}") from e
+    # Thinking-capable models (Gemma included) return a leading part with
+    # "thought": true holding the reasoning trace -- skip it, we want the
+    # actual answer text, not the model's scratch work.
+    answer_parts = [p["text"] for p in parts if not p.get("thought") and "text" in p]
+    if not answer_parts:
+        raise LLMError(f"Gemini response had no non-thought text parts: {resp}")
+    return "\n".join(answer_parts)
 
 
 def complete(prompt, provider="openrouter", model=None, temperature=0.0):
