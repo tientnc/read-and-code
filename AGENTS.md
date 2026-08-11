@@ -1,24 +1,24 @@
-# read-and-code — agent instructions
+# read-and-code - agent instructions
 
 This repo reproduces ML papers as working, verified code. Every reproduction
 starts with the same fork in the road, decided by the **paper-triage**
 skill (`.agents/skills/paper-triage/SKILL.md`):
 
-1. **Official code exists.** Don't just skim the README — read the actual
+1. **Official code exists.** Don't just skim the README - read the actual
    code to understand what it does, since paper repos routinely drift from
    what the paper claims. Fork or vendor it into
    `reproductions/<slug>/`, adapt it to run locally, and note every
    deviation from upstream and why it was necessary.
 2. **No usable code.** Run the **pdf-to-spec** skill
    (`.agents/skills/pdf-to-spec/SKILL.md`) first. Produce
-   `reproductions/<slug>/SPEC.md` — equations, algorithm/pseudocode,
-   architecture, hyperparameters, evaluation protocol — before writing any
+   `reproductions/<slug>/SPEC.md` - equations, algorithm/pseudocode,
+   architecture, hyperparameters, evaluation protocol - before writing any
    implementation. Implementing straight from a half-remembered read of the
    PDF produces code that looks right and isn't.
 
 Both paths converge on the same finish line: `reproductions/<slug>/RESULTS.md`
 comparing what was actually obtained against what the paper reports, stated
-honestly — including where it doesn't match and the best guess at why.
+honestly - including where it doesn't match and the best guess at why.
 
 ## Ground rules
 

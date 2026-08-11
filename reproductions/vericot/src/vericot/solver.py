@@ -75,7 +75,7 @@ class KnowledgeBase:
         established U extra_assertions U {not assert_text} is unsat.
 
         extra_assertions lets a candidate premise be tried tentatively
-        (§2.3) without committing it via add_established first."""
+        (Section 2.3) without committing it via add_established first."""
         ctx, solver, preamble = self._solver_with_established(decl_text, extra_assertions)
         new_formulas = _parse("\n".join([preamble, assert_text]), ctx)
         if not new_formulas:

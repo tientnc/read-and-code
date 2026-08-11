@@ -1,4 +1,4 @@
-"""Sanity check: reproduce the paper's own §2.1 worked example (Figure 1 /
+"""Sanity check: reproduce the paper's own Section 2.1 worked example (Figure 1 /
 Charlie-Bob benefits) purely with hand-written SMT-LIB, no LLM involved.
 This validates solver.py's semantics before autoformalization (which adds
 LLM noise) is layered on top."""

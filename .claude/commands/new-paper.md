@@ -12,5 +12,5 @@ Given `$ARGUMENTS` (an arXiv ID, a path to a PDF, or an official repo URL):
    `reproductions/<slug>/README.md`.
 3. If PDF-only, immediately hand off to the **pdf-to-spec** skill to
    produce `reproductions/<slug>/SPEC.md` before writing any code.
-4. Stop after triage (and spec, if applicable) — don't start implementing
+4. Stop after triage (and spec, if applicable) - don't start implementing
    in the same pass. Report the decision and next step back to the user.

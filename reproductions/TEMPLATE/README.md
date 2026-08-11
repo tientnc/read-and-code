@@ -2,7 +2,7 @@
 
 - **Paper:** <title, arXiv link>
 - **Official repo:** <link, or "none found">
-- **Path taken:** <official-repo | pdf-only> — <one-line why>
+- **Path taken:** <official-repo | pdf-only> - <one-line why>
 
 ## Notes
 

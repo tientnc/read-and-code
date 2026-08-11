@@ -1,4 +1,4 @@
-"""Two-stage NL -> SMT-LIB autoformalization (paper §2.2).
+"""Two-stage NL -> SMT-LIB autoformalization (paper Section 2.2).
 
 Stage 1 asks the LLM to translate a CoT step into SMT-LIB using only the
 vocabulary already declared. If that's insufficient (or doesn't parse),
@@ -32,7 +32,7 @@ Using ONLY the vocabulary listed above (do not invent any new declare-fun / decl
 If the existing vocabulary is NOT sufficient to express this step, respond with exactly the single line:
 {marker}
 
-Otherwise, respond with ONLY the SMT-LIB assert statement(s) — no explanation, no markdown code fences, no commentary."""
+Otherwise, respond with ONLY the SMT-LIB assert statement(s) - no explanation, no markdown code fences, no commentary."""
 
 STAGE2_PROMPT = """The following chain-of-thought step could not be translated to SMT-LIB with the current vocabulary.
 
@@ -45,7 +45,7 @@ Context:
 Step:
 "{step_text}"
 
-Write ONLY the new SMT-LIB declarations (declare-sort / declare-fun / declare-const) needed to express this step. Use new names that don't collide with the existing vocabulary above. Respond with ONLY the declarations — no explanation, no markdown code fences, no commentary."""
+Write ONLY the new SMT-LIB declarations (declare-sort / declare-fun / declare-const) needed to express this step. Use new names that don't collide with the existing vocabulary above. Respond with ONLY the declarations - no explanation, no markdown code fences, no commentary."""
 
 
 class UntranslatableError(RuntimeError):

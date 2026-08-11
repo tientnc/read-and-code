@@ -1,6 +1,6 @@
 """Pull a small ProofWriter sample from the HF datasets-server API (no
 `datasets` library dependency needed for a handful of rows) and generate a
-CoT for each with the executor model, mirroring what the paper's §3.3
+CoT for each with the executor model, mirroring what the paper's Section 3.3
 "direct evaluation of VeriCoT" experiment verifies."""
 
 import json

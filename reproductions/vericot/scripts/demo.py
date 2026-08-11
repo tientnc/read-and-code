@@ -19,6 +19,7 @@ def main():
     parser.add_argument("--n", type=int, default=5)
     parser.add_argument("--offset", type=int, default=0)
     parser.add_argument("--provider", default="openrouter", choices=["openrouter", "gemini"])
+    parser.add_argument("--model", default=None, help="override the provider's default model, e.g. gemma-4-26b-a4b-it")
     args = parser.parse_args()
 
     rows = fetch_proofwriter_rows(n=args.n, offset=args.offset)
@@ -33,7 +34,9 @@ def main():
         print("Gold:", gold)
 
         try:
-            steps, model_answer = generate_cot(row["context"], row["question"], provider=args.provider)
+            steps, model_answer = generate_cot(
+                row["context"], row["question"], provider=args.provider, model=args.model
+            )
         except Exception as e:  # noqa: BLE001 -- demo script, surface and move on
             print("  CoT generation failed:", e)
             continue
@@ -43,7 +46,7 @@ def main():
         n_task_correct += int(task_correct)
 
         try:
-            result = verify_cot(row["context"], steps, provider=args.provider)
+            result = verify_cot(row["context"], steps, provider=args.provider, model=args.model)
         except Exception as e:  # noqa: BLE001
             print("  verification crashed:", e)
             continue

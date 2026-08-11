@@ -1,16 +1,16 @@
-"""Premise generation (paper §2.3): when a step is neither entailed nor
+"""Premise generation (paper Section 2.3): when a step is neither entailed nor
 contradicted, ask the LLM for supporting NL premises (context or
 commonsense), autoformalize each, keep only the ones consistent with what's
 established so far, and conjoin the survivors into a candidate P_i.
 
-LLM-as-judge filtering (§2.4) is explicitly out of scope for this
-reproduction's core-loop-only pass — see SPEC.md.
+LLM-as-judge filtering (Section 2.4) is explicitly out of scope for this
+reproduction's core-loop-only pass - see SPEC.md.
 """
 
 from vericot.autoformalize import UntranslatableError, autoformalize
 from vericot.llm import complete
 
-PREMISE_PROMPT = """Given the context and a chain-of-thought step that does not yet logically follow from what's established, propose supporting premises: standalone natural-language statements which, if accepted, would help justify the step. Each premise should come from either (a) the source context/document, or (b) general commonsense — not from the step itself (don't just restate it).
+PREMISE_PROMPT = """Given the context and a chain-of-thought step that does not yet logically follow from what's established, propose supporting premises: standalone natural-language statements which, if accepted, would help justify the step. Each premise should come from either (a) the source context/document, or (b) general commonsense - not from the step itself (don't just restate it).
 
 Context:
 {context}

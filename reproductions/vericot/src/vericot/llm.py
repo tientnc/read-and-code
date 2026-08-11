@@ -54,7 +54,10 @@ def _retry_delay_seconds(detail, attempt):
     return 2**attempt * 5
 
 
-def _post_json(url, headers, payload, timeout=60, retries=4):
+TRANSIENT_HTTP_CODES = {429, 500, 502, 503, 504}
+
+
+def _post_json(url, headers, payload, timeout=120, retries=4):
     body = json.dumps(payload).encode()
     req = urllib.request.Request(url, data=body, headers=headers, method="POST")
     for attempt in range(retries):
@@ -63,10 +66,15 @@ def _post_json(url, headers, payload, timeout=60, retries=4):
                 return json.loads(resp.read())
         except urllib.error.HTTPError as e:
             detail = e.read().decode(errors="replace")
-            if e.code == 429 and attempt < retries - 1:
+            if e.code in TRANSIENT_HTTP_CODES and attempt < retries - 1:
                 time.sleep(_retry_delay_seconds(detail, attempt))
                 continue
             raise LLMError(f"HTTP {e.code} from {url}: {detail}") from e
+        except TimeoutError as e:
+            if attempt < retries - 1:
+                time.sleep(2**attempt * 5)
+                continue
+            raise LLMError(f"repeated timeouts against {url} ({timeout}s each)") from e
     raise LLMError(f"exhausted retries against {url}")
 
 
