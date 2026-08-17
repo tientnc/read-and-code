@@ -50,13 +50,7 @@ read-and-code/
 
 | Paper | What it does | Scope reproduced | Status |
 |---|---|---|---|
-| [VeriCoT](reproductions/vericot/) - arXiv:2511.04662 | Verifies chain-of-thought reasoning step-by-step: autoformalizes each step to first-order logic and checks it against a growing Z3 knowledge base for entailment/contradiction, generating a supporting premise (from context or commonsense) when a step doesn't follow directly. | Core loop only (Algorithm 1) - autoformalization, consistency/entailment checks, premise generation. Not self-reflection, SFT/DPO fine-tuning, or LLM-as-judge filtering. | Done - see [RESULTS.md](reproductions/vericot/RESULTS.md) |
+| [VeriCoT](reproductions/vericot/) - arXiv:2511.04662 | Verifies chain-of-thought reasoning step-by-step: autoformalizes each step to first-order logic and checks it against a growing Z3 knowledge base for entailment/contradiction. | Core loop only (Algorithm 1) - autoformalization, consistency/entailment checks, premise generation. | Done - see [RESULTS.md](reproductions/vericot/RESULTS.md) |
+| [P-FOLIO](reproductions/p-folio/) - arXiv:2410.09207 | Human-written step-by-step reasoning chains built on FOLIO. | Dataset artifact reproduction: full reconstruction from spreadsheet dump, lineage matching against FOLIO ground truth, split reconstruction, and text encoding audit. | Done - see [RESULTS.md](reproductions/p-folio/RESULTS.md) |
+| [AlphaAgent](reproductions/alphaagent/) - arXiv:2502.16789 | LLM-driven alpha factor mining with regularized exploration to counteract alpha decay. | Full factor mining workflow, hypothesis generation, Qlib factor execution, Rank IC / ICIR backtest evaluations, and Gemini OpenAI-compatible backend integration. | Done - see [RESULTS.md](reproductions/alphaagent/RESULTS.md) |
 
-## Showcase
-
-Reproductions that outgrew this repo and became their own standalone
-project - linked here rather than vendored in `reproductions/`.
-
-| Paper | What it does | Reproduction |
-|---|---|---|
-| [AlphaAgent](showcase/alphaagent.md) | LLM-driven alpha factor mining: proposes a market hypothesis, turns it into factor expressions, backtests them with Qlib, and feeds results back into the next iteration. | Standalone repo (`~/AlphaAgent`), forked from the official implementation - official code existed, so this predates and doesn't need this framework's PDF-only tooling. |
