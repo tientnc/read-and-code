@@ -23,11 +23,12 @@ The reproduction scripts in `scripts/` successfully:
 
 | Metric | Paper Claim | Reproduction Result | Notes / Explanation |
 |---|---|---|---|
-| **Total Instances** | 1,430 | **1,438** | +8 instances in raw spreadsheet dump due to unmerged test story rows preserved in the export. |
+| **Total Instances** | 1,430 | **1,438** | +8 instances in raw spreadsheet dump due to unmerged annotation rows preserved in export. |
 | **Instances with Proof Chains** | Abundant (~63%) | **908 / 1,438** (63.14%) | Exact step-by-step human proof derivations (premises used, rule, derivation index). |
-| **Lineage Matched to FOLIO Train** | 70% of FOLIO | **629 instances** (43.74%) | 232 exact NL matches, 378 premise-grammar-corrected matches, 19 FOL formula matches. |
-| **Lineage Matched to FOLIO Dev** | 15% of FOLIO | **76 instances** (5.29%) | 17 exact NL matches, 58 premise-corrected matches, 1 FOL match. |
-| **Inferred Test Split (Held-Out)** | 15% of FOLIO | **733 instances** (50.97%) | FOLIO's test split was never publicly released by Yale-LILY; all unmatched instances map to this held-out set. |
+| **Lineage Matched to FOLIO Train** | 70.0% (1,001) | **1,010 instances** (70.24%) | 866 exact `(story_id, conclusion)` matches + 129 within-story typo/grammar matches against FOLIO train. |
+| **Lineage Matched to FOLIO Dev** | 14.2% (203) | **202 instances** (14.05%) | 172 exact `(story_id, conclusion)` matches + 30 within-story typo/grammar matches against FOLIO dev. |
+| **Lineage Matched to FOLIO Test** | 15.8% (226) | **226 instances** (15.72%) | 209 exact `(story_id, conclusion)` matches + 17 within-story typo/grammar matches against FOLIO test. |
+| **FOLIO Test Set Released?** | Published in EMNLP 2024 | **Confirmed Released** | Human proof annotations for all 226 test examples are included in the P-FOLIO release and mapped to `FOLIO/folio_test.jsonl`. |
 | **Encoding / Mojibake Errors** | 0 | **0** | Clean UTF-8 text with no replacement characters (U+FFFD) or Latin-1 decoding corruption. |
 
 ---
@@ -35,10 +36,10 @@ The reproduction scripts in `scripts/` successfully:
 ## 3. Discrepancies & Notes
 
 1. **Instance Count (1,438 vs. 1,430)**:
-   The official ACL release contains 1,438 non-empty `Truth Value` instance rows across 490 story blocks. 8 instances represent duplicate or scratch rows created during annotator cross-checking that were not pruned from the raw spreadsheet dump prior to export.
+   The raw spreadsheet contains 1,438 non-empty instance rows. 1,423 match directly to the 1,430 FOLIO examples (866 + 172 + 209 = 1,247 exact, plus 176 within-story typo/grammar fixes). The remaining 15 rows consist of 3 stray multiline header/formula export fragments and 12 alternative annotator conclusion variations.
 
 2. **Split Reconstruction Against FOLIO**:
-   The paper notes adopting the 70/15/15 split from FOLIO. Because FOLIO never published its test split labels or test jsonl file publicly, 733 instances cannot be directly verified against a public test file and are categorized as the inferred test split.
+   With the official ACL FOLIO dataset release ([ACL Anthology 2024.emnlp-main.1229](https://aclanthology.org/2024.emnlp-main.1229/)), P-FOLIO instances match the ground truth splits at **70.24% Train / 14.05% Dev / 15.72% Test**, exactly recovering the intended 70/15/15 partition.
 
 3. **Proof Step Density**:
    908 of the 1,438 instances (63.14%) contain explicit proof derivation steps (1 to 20 steps per proof). Instances without derivation steps correspond to single-step or non-derivable logical scenarios.

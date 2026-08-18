@@ -15,6 +15,7 @@ import zipfile
 DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
 OUTPUT_FILE = os.path.join(DATA_DIR, "p-folio-raw.jsonl")
 ACL_ZIP_URL = "https://aclanthology.org/attachments/2024.findings-emnlp.966.data.zip"
+FOLIO_ACL_ZIP_URL = "https://aclanthology.org/attachments/2024.emnlp-main.1229.data.zip"
 FOLIO_TRAIN_URL = "https://raw.githubusercontent.com/Yale-LILY/FOLIO/main/data/v0.0/folio-train.jsonl"
 FOLIO_DEV_URL = "https://raw.githubusercontent.com/Yale-LILY/FOLIO/main/data/v0.0/folio-validation.jsonl"
 
@@ -186,10 +187,24 @@ def parse_unified_csv(csv_path):
     return instances
 
 
+def ensure_folio_acl():
+    acl_dir = os.path.join(DATA_DIR, "folio_acl")
+    test_file = os.path.join(acl_dir, "FOLIO", "folio_test.jsonl")
+    if os.path.exists(test_file) and os.path.getsize(test_file) > 0:
+        return acl_dir
+    
+    zip_path = os.path.join(DATA_DIR, "folio_acl_data.zip")
+    download_file(FOLIO_ACL_ZIP_URL, zip_path)
+    with zipfile.ZipFile(zip_path) as z:
+        z.extractall(acl_dir)
+    return acl_dir
+
+
 def main():
     os.makedirs(DATA_DIR, exist_ok=True)
     download_file(FOLIO_TRAIN_URL, os.path.join(DATA_DIR, "folio-train.jsonl"))
     download_file(FOLIO_DEV_URL, os.path.join(DATA_DIR, "folio-validation.jsonl"))
+    ensure_folio_acl()
 
     csv_path = ensure_acl_dataset()
     print(f"[parsing] {csv_path}...")

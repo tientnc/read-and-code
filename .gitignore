@@ -5,3 +5,8 @@ __pycache__/
 *.log
 .DS_Store
 *.egg-info/
+.cache/
+__MACOSX/
+*.zip
+reproductions/*/data/folio_acl/
+reproductions/*/data/hf_*/

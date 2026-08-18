@@ -54,3 +54,15 @@ read-and-code/
 | [P-FOLIO](reproductions/p-folio/) - arXiv:2410.09207 | Human-written step-by-step reasoning chains built on FOLIO. | Dataset artifact reproduction: full reconstruction from spreadsheet dump, lineage matching against FOLIO ground truth, split reconstruction, and text encoding audit. | Done - see [RESULTS.md](reproductions/p-folio/RESULTS.md) |
 | [AlphaAgent](reproductions/alphaagent/) - arXiv:2502.16789 | LLM-driven alpha factor mining with regularized exploration to counteract alpha decay. | Full factor mining workflow, hypothesis generation, Qlib factor execution, Rank IC / ICIR backtest evaluations, and Gemini OpenAI-compatible backend integration. | Done - see [RESULTS.md](reproductions/alphaagent/RESULTS.md) |
 
+## Future Paper Candidates
+
+Trading & Business-Oriented candidates for future reproduction:
+
+- Alpha-GPT and Alpha-GPT 2.0 (Human-in-the-Loop Alpha Mining)
+- TradingAgents (Multi-Agent LLM Trading Simulation)
+- FinGPT (Open-Source Financial Large Language Models)
+- DeepScalper (Reinforcement Learning in High-Frequency Trading)
+- FinMem (Performance-Enhanced LLM Framework with Layered Memory for Trading)
+- StockAgent (Multimodal Multi-Agent Market Simulation)
+- PRIME (Portfolio Optimization via Reinforcement Learning with Information Maximization)
+
